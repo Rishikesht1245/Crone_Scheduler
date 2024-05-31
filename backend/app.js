@@ -3,6 +3,7 @@ import dotenv from "dotenv";
 import cors from "cors";
 import connectDB from "./db.js";
 import User from "./models/user.model.js";
+import userRouter from "./routes/user.router.js";
 
 dotenv.config();
 
@@ -16,21 +17,29 @@ app.use(express.urlencoded({ extended: true }));
 // parses json data
 app.use(express.json({ limit: "2mb" }));
 
-// error handling middleware
-app.use((error, req, res, next) => {
-  console.log("Error occurred", error);
-  return res
-    .status(500)
-    .json({ success: false, message: "Something went wrong" });
-});
-
-// unhandled exception
-process.on("uncaughtException", (error) => {
-  console.log("UnCaught exception occurred!", error);
-});
-
 // connection to DB
 connectDB();
+
+// routes
+app.use("/api/vi/users", userRouter);
+
+// error handling middleware for asynchronous errors
+app.use((err, req, res, next) => {
+  console.log(err.message, "=== app error message");
+  const statusCode = err.statusCode || 500; // internal server error
+  //mongo duplicate error || custom Error or Internal server error
+  const message = err.message || "Internal Server Error";
+  return res.status(statusCode).json({
+    success: false,
+    statusCode,
+    message,
+  });
+});
+
+// error handler for uncaught exceptions
+process.on("uncaughtException", (error) => {
+  console.log("Uncaught exception occurred : ", error);
+});
 
 // listening to port
 const PORT = process.env.PORT;
