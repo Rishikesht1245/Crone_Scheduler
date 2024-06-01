@@ -21,7 +21,7 @@ app.use(express.json({ limit: "2mb" }));
 connectDB();
 
 // routes
-app.use("/api/vi/users", userRouter);
+app.use("/api/v1/users", userRouter);
 
 // error handling middleware for asynchronous errors
 app.use((err, req, res, next) => {
