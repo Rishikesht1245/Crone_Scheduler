@@ -45,38 +45,36 @@
 
 4.  Create a `.env` file in the server directory with the following variables:
 
-        ```bash
+```bash
 
-    PORT=3000
-    MONGO_URI='your_mongo_uri'
-    TRANSPORTER_USERNAME= 'email'
-    TRANSPORTER_PASSWORD= 'app password for email'
+   PORT=3000
+   MONGO_URI='your_mongo_uri'
+   TRANSPORTER_USERNAME= 'email'
+   TRANSPORTER_PASSWORD= 'app password for email'
 
-    ```
-
-    ```
+```
 
 5.  Start the server:
 
-        ```bash
-        cd ../server
-        npm start
-        ```
+    ```bash
+    cd ../server
+    npm start
+    ```
 
 6.  Create a `.env` file in the server directory with the following variables:
 
-    ```bash
+```bash
 
-    VITE_BACKEND_API='http://localhost:3000/api/v1/users/'
+VITE_BACKEND_API='http://localhost:3000/api/v1/users/'
 
-    ```
+```
 
 7.  Start the client:
 
-    ```bash
-    cd ../client
-    npm run dev
-    ```
+```bash
+cd ../client
+npm run dev
+```
 
 8.  Access the application at `http://localhost:5173`.
 
@@ -91,18 +89,20 @@
 
 1. Click on "New".
 2. Fill in the schedule details:
-   - Name
-   - Date
-   - Type (None, Daily, Weekly, Monthly)
+
+- Name
+- Date
+- Type (None, Daily, Weekly, Monthly)
+
 3. Save the schedule.
 
 ### Receiving Email Reminders
 
 - Ensure your email address is correct.
 - The application will send reminder emails based on the schedule type:
-  - **Daily**: Every day
-  - **Weekly**: On the same day of each week
-  - **Monthly**: On the same date each month
+- **Daily**: Every day
+- **Weekly**: On the same day of each week
+- **Monthly**: On the same date each month
 
 ## Technologies
 
@@ -111,3 +111,7 @@
 - **Database**: MongoDB, Mongoose
 - **Email**: Nodemailer
 - **Scheduling**: node-cron
+
+```
+
+```
