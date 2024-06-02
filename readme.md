@@ -45,7 +45,7 @@
 
 4.  Create a `.env` file in the server directory with the following variables:
 
-        ```plaintext
+        ```bash
 
     PORT=3000
     MONGO_URI='your_mongo_uri'
@@ -65,13 +65,9 @@
 
 6.  Create a `.env` file in the server directory with the following variables:
 
-    ```plaintext
+    ```bash
 
     VITE_BACKEND_API='http://localhost:3000/api/v1/users/'
-
-    ```
-
-    ```
 
     ```
 
@@ -115,7 +111,3 @@
 - **Database**: MongoDB, Mongoose
 - **Email**: Nodemailer
 - **Scheduling**: node-cron
-
-## License
-
-This project is licensed under the MIT License.
