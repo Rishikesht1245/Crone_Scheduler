@@ -30,10 +30,11 @@ app.use("/api/v1/users", userRouter);
 // for deployment
 // for deployment
 const __dirname = path.resolve();
-app.use(express.static(path.join(__dirname, "/backend/dist")));
+console.log(__dirname, "==dirname");
+app.use(express.static(path.join(__dirname, "/dist")));
 
 app.get("*", (req, res) => {
-  res.sendFile(path.join(__dirname, "backend", "dist", "index.html"));
+  res.sendFile(path.join(__dirname, "dist", "index.html"));
 });
 
 // error handling middleware for asynchronous errors
