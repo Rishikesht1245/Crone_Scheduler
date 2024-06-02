@@ -55,7 +55,10 @@ export const userController = {
     }
     try {
       const userId = req.params.userId;
-      const allSchedules = await Schedule.find({ userId });
+      const allSchedules = await Schedule.find({ userId })
+        .populate({ path: "userId", select: "-password" })
+        .select("-password")
+        .exec();
       if (allSchedules && allSchedules?.length > 0) {
         res.status(200).json({
           success: true,
