@@ -1,0 +1,13 @@
+{
+  "name": "cloud_whiz",
+  "version": "1.0.0",
+  "description": "Project overlay",
+  "main": "index.js",
+  "scripts": {
+    "dev": "nodemon backend/app.js",
+    "start": "node backend/app.js",
+    "build": "npm install --prefix backend && npm install --prefix client && npm run build --prefix client"
+  },
+  "author": "",
+  "license": "ISC"
+}

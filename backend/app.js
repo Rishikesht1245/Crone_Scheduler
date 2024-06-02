@@ -4,6 +4,7 @@ import cors from "cors";
 import connectDB from "./db.js";
 import userRouter from "./routes/user.router.js";
 import runJobs from "./utils/cronJob.js";
+import path from "path";
 
 dotenv.config();
 
@@ -25,6 +26,15 @@ runJobs();
 
 // routes
 app.use("/api/v1/users", userRouter);
+
+// for deployment
+// for deployment
+const __dirname = path.resolve();
+app.use(express.static(path.join(__dirname, "/backend/dist")));
+
+app.get("*", (req, res) => {
+  res.sendFile(path.join(__dirname, "backend", "dist", "index.html"));
+});
 
 // error handling middleware for asynchronous errors
 app.use((err, req, res, next) => {

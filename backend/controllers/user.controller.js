@@ -112,9 +112,13 @@ export const userController = {
           errorHandler(401, "You are not authorized to edit the schedule")
         );
       }
-      const updatedSchedule = await Schedule.findByIdAndUpdate(id, {
-        new: true,
-      });
+      const updatedSchedule = await Schedule.findByIdAndUpdate(
+        id,
+        { ...req.body },
+        {
+          new: true,
+        }
+      );
       res.status(200).json({
         success: true,
         message: "Schedule updated successfully!",

@@ -1,6 +1,6 @@
 import ReactModal from "react-modal";
 
-const Modal = ({ isOpen, children, heading }) => {
+const Modal = ({ isOpen, children, heading, closeHandler }) => {
   // binding the modal to the app
   ReactModal.setAppElement("#root");
 
@@ -61,6 +61,14 @@ const Modal = ({ isOpen, children, heading }) => {
       {/* heading and close button */}
       <div className="flex w-full relative">
         <h1>{heading}</h1>
+        {closeHandler && (
+          <button
+            className="absolute font-black right-1 top-0 bg-gray-100 rounded-sm px-1 text-lg text-primary"
+            onClick={closeHandler}
+          >
+            X
+          </button>
+        )}
       </div>
       {/* content */}
       <div className="w-full overflow-y-auto">{children}</div>

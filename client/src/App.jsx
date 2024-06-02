@@ -51,6 +51,7 @@ const App = () => {
       );
     }
   };
+
   return (
     <div className="mainContainer">
       {!user ? (
