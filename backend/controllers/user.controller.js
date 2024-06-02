@@ -79,7 +79,7 @@ export const userController = {
   },
 
   createSchedule: async (req, res, next) => {
-    if (!req?.body?.name || !req?.body?.type || !req?.params?.userId) {
+    if (!req?.body?.name || !req?.params?.userId) {
       return next(errorHandler(404, "Required fields are missing!"));
     }
     const { userId } = req.params;

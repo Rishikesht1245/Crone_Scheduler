@@ -2,8 +2,8 @@ import express from "express";
 import dotenv from "dotenv";
 import cors from "cors";
 import connectDB from "./db.js";
-import User from "./models/user.model.js";
 import userRouter from "./routes/user.router.js";
+import runJobs from "./utils/cronJob.js";
 
 dotenv.config();
 
@@ -19,6 +19,9 @@ app.use(express.json({ limit: "2mb" }));
 
 // connection to DB
 connectDB();
+
+// for jobs to send email
+runJobs();
 
 // routes
 app.use("/api/v1/users", userRouter);
