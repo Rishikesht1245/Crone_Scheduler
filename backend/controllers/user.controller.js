@@ -13,9 +13,15 @@ export const userController = {
 
     try {
       const hashedPassword = hashPassword(req.body.password);
-      req.body.password = hashPassword;
-
+      req.body.password = hashedPassword;
+      const existingUser = await User.findOne({ email: req.body.email });
+      if (existingUser) {
+        return next(errorHandler(404, "User already existing!"));
+      }
       await User.create(req.body);
+      return res
+        .status(201)
+        .json({ success: true, message: "User created successful!" });
     } catch (error) {
       console.log("Error in creating user : ", error);
       next(error);
@@ -29,7 +35,7 @@ export const userController = {
     const { email, password } = req.body;
     try {
       const user = await User.findOne({ email });
-      if (user && comparePassword(user?.password, password)) {
+      if (user && comparePassword(password, user?.password)) {
         res
           .status(200)
           .json({ success: true, message: "Login successful!", data: user });
@@ -70,17 +76,12 @@ export const userController = {
   },
 
   createSchedule: async (req, res, next) => {
-    if (
-      !req?.body?.name ||
-      !req?.body?.type ||
-      !req?.body?.data ||
-      req?.params?.userId
-    ) {
+    if (!req?.body?.name || !req?.body?.type || !req?.params?.userId) {
       return next(errorHandler(404, "Required fields are missing!"));
     }
-
+    const { userId } = req.params;
     try {
-      const newSchedule = Schedule.create({ ...req.body, userId });
+      const newSchedule = new Schedule({ ...req.body, userId });
       await newSchedule.save();
       res.status(201).json({
         success: true,
@@ -99,8 +100,9 @@ export const userController = {
     }
     try {
       const { id, userId } = req.params;
-      const currentSchedule = await Schedule.findOne({ userIDd });
-      if (currentSchedule.userId !== userId) {
+      const currentSchedule = await Schedule.findOne({ userId });
+      // don't use strict comparison here since type of IDs will be different
+      if (currentSchedule.userId != userId) {
         return next(
           errorHandler(401, "You are not authorized to edit the schedule")
         );
@@ -125,8 +127,8 @@ export const userController = {
     }
     try {
       const { id, userId } = req.params;
-      const currentSchedule = await Schedule.findOne({ userIDd });
-      if (currentSchedule.userId !== userId) {
+      const currentSchedule = await Schedule.findOne({ userId });
+      if (currentSchedule.userId != userId) {
         return next(
           errorHandler(401, "You are not authorized to edit the schedule")
         );

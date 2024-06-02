@@ -13,6 +13,10 @@ const ScheduleSchema = new Schema({
     type: String,
     required: true,
   },
+  data: {
+    type: String,
+    default: new Date(),
+  },
 });
 
 const Schedule = mongoose.model("Schedules", ScheduleSchema);
