@@ -117,7 +117,7 @@ const Schedules = () => {
       {
         name: "Schedule Date",
         sortable: true,
-        selector: (row) => moment(row.date).format("DD-MM-YYYY HH:MM"),
+        selector: (row) => moment(row.date).format("DD-MM-YYYY"),
         grow: 2,
       },
       {
