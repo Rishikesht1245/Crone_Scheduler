@@ -34,8 +34,10 @@ export const userController = {
     }
     const { email, password } = req.body;
     try {
-      const user = await User.findOne({ email });
+      let user = await User.findOne({ email });
       if (user && comparePassword(password, user?.password)) {
+        user = user.toObject();
+        delete user.password;
         res
           .status(200)
           .json({ success: true, message: "Login successful!", data: user });
