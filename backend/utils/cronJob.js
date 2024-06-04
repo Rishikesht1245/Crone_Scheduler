@@ -45,7 +45,7 @@ const checkAndSendMails = async () => {
 };
 
 const runJobs = () => {
-  cron.schedule("0 0 * * *", () => {
+  cron.schedule("* * * * *", () => {
     console.log("cron jobs running");
     checkAndSendMails();
   });
